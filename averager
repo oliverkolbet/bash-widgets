@@ -1,0 +1,25 @@
+#! /bin/bash
+
+echo "Welcome to the ridiculously simple average machine!"
+sleep 1s
+echo "Type a number and press enter. Keep typing numbers to add them to the list, and then type \"Done\" when done."
+
+num=0
+n=0
+res='90'
+while [ $res != 'done' ]
+do
+echo "Type a number (or 'done'):"
+read res
+if [ $res != 'done' ]
+then
+((num=num+$res))
+((n=n+1))
+else
+break
+fi
+done
+ans=$((num/n))
+
+echo "Averaged sum:"
+echo $ans
