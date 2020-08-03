@@ -1,0 +1,10 @@
+#! /bin/bash
+#moves .zip files to .zip.ez files, encrypt and decrypt
+
+if [ '$1' == '-e' ]; then
+zip -r "$2"
+mv "$2.zip" "$2.zip.ez"
+elif [ '$1' == '-d' ]; then
+mv "$2.zip.ez" "$2.zip"
+unzip "$2.zip"
+fi
