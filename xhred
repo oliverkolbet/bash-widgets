@@ -3,5 +3,6 @@
 i=0
 while [ $i -lt 11 ]; do
 shred -x -z -f "$@"
+((i=i+1))
 done
 rm "$@"
