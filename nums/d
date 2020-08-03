@@ -1,0 +1,4 @@
+#!/bin/bash
+
+echo "This filename is a random number!" > "$((RANDOM)).d"
+

@@ -1,0 +1,18 @@
+#! /usr/bin/env python3
+import os
+from time import sleep
+
+min=19
+sec=60
+
+while min>0:
+	while sec>0:
+		sleep(1)
+		sec-=1
+		os.system('clear')
+		print('Time: '+str(min)+':'+str(sec))
+	min-=1
+	sec=60
+	if min==1:
+		print('\033[31mWARNING! 1 MINUTE LEFT!')
+os.system('sudo shutdown -P')
