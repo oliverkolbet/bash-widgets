@@ -22,3 +22,4 @@ done
 else
 echo "${values[$((RANDOM%13))]} of ${suits[$((RANDOM%4))]}"
 fi
+
