@@ -16,7 +16,19 @@ elif [ "$1" == 'hand' ]; then
 echo "Hand:"
 e=0
 while [ "$e" != "$2" ]; do
+if [ "$3" == '-l' ]; then
+suitz[0]="$4"
+suitz[1]="$5"
+suitz[2]="$6"
+suitz[3]="$7"
+echo "${values[$((RANDOM%13))]} of ${suitz[$((RANDOM%4))]}"
+elif [ "$3" == '-s' ]; then
+echo "${values[$((RANDOM%13))]} of $4"
+elif [ "$3" == '-v' ]; then
+echo "$4 of ${suits[$((RANDOM%4))]}"
+else
 echo "${values[$((RANDOM%13))]} of ${suits[$((RANDOM%4))]}"
+fi
 ((e=e+1))
 done
 else
