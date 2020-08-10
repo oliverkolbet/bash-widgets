@@ -1,5 +1,6 @@
 #! /bin/bash
-#if there is a file named 'cardpacks' in the current directory...
+handsaid='n'
+#if there is a file named 'cardpack' in the current directory...
 case $(ls) in
 *cardpack*)
 readd="$(cat cardpack)"
@@ -35,26 +36,32 @@ elif [ "$1" == 'hand' ]; then
 echo "Hand:"
 e=0
 while [ "$e" != "$2" ]; do
-#the '-l' option in a hand.
+#the '-l' option in a hand
 if [ "$3" == '-l' ]; then
 suitz[0]="$4"
 suitz[1]="$5"
 suitz[2]="$6"
 suitz[3]="$7"
 echo "${values[$((RANDOM%13))]} of ${suitz[$((RANDOM%4))]}"
-#the '-s' option
+#the '-s' option in a hand
 elif [ "$3" == '-s' ]; then
 echo "${values[$((RANDOM%13))]} of $4"
-#the '-l' option
+#the '-l' option in a hand
 elif [ "$3" == '-v' ]; then
 echo "$4 of ${suits[$((RANDOM%4))]}"
+elif [ "$3" == '-o' ]; then
+echo "${values[$((RANDOM%13))]} of ${suits[$((RANDOM%4))]}" >> "$4"
+if [ "$handsaid" == 'n' ]; then
+echo "Random hand of $2 cards outputted to $4."
+handsaid='y'
+fi
 else
 echo "${values[$((RANDOM%13))]} of ${suits[$((RANDOM%4))]}"
 fi
 ((e=e+1))
 done
 else
-#else, echo just a random value and suit.
+#else, echo just a random value and suit from the current cardpack.
 echo "${values[$((RANDOM%13))]} of ${suits[$((RANDOM%4))]}"
 fi
 
