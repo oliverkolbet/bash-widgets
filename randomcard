@@ -1,29 +1,51 @@
 #! /bin/bash
+#if there is a file named 'cardpacks' in the current directory...
+case $(ls) in
+*cardpack*)
+readd="$(cat cardpack)"
+#read the file
+IFS='/' read -a mainarray <<< $readd
+valstring="${mainarray[0]}"
+suitstring="${mainarray[1]}"
+#turn the file into the suits and values to choose from.
+read -a values <<< $valstring
+read -a suits <<< $suitstring
+;;
+*)
+#if there is no file named 'cardpacks'...
 values=(Ace Two Three Four Five Six Seven Eight Nine Ten Jack Queen King)
 suits=(Spades Hearts Clubs Diamonds)
-
+;;
+esac
+#if the '-l' option is given, choose from those suits.
 if [ "$1" == '-l' ]; then
 suitz[0]="$2"
 suitz[1]="$3"
 suitz[2]="$4"
 suitz[3]="$5"
 echo "${values[$((RANDOM%13))]} of ${suitz[$((RANDOM%4))]}"
+#choose a suit with '-s'
 elif [ "$1" == '-s' ]; then
 echo "${values[$((RANDOM%13))]} of $2"
+#choose a value with '-v'
 elif [ "$1" == '-v' ]; then
 echo "$2 of ${suits[$((RANDOM%4))]}"
+#print a hand of cards, with $2 cards in the hand.
 elif [ "$1" == 'hand' ]; then
 echo "Hand:"
 e=0
 while [ "$e" != "$2" ]; do
+#the '-l' option in a hand.
 if [ "$3" == '-l' ]; then
 suitz[0]="$4"
 suitz[1]="$5"
 suitz[2]="$6"
 suitz[3]="$7"
 echo "${values[$((RANDOM%13))]} of ${suitz[$((RANDOM%4))]}"
+#the '-s' option
 elif [ "$3" == '-s' ]; then
 echo "${values[$((RANDOM%13))]} of $4"
+#the '-l' option
 elif [ "$3" == '-v' ]; then
 echo "$4 of ${suits[$((RANDOM%4))]}"
 else
@@ -32,6 +54,7 @@ fi
 ((e=e+1))
 done
 else
+#else, echo just a random value and suit.
 echo "${values[$((RANDOM%13))]} of ${suits[$((RANDOM%4))]}"
 fi
 
