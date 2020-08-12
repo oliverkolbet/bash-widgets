@@ -1,0 +1,7 @@
+#! /bin/sh
+case $(cat dict.txt) in
+*"$1"*)
+echo "Yes, $1 is a word.";;
+*)
+echo "No, $1 is not a word.";;
+esac
